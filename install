@@ -20,4 +20,4 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends linux-
 #realm discover essentia6.local > /tmp/ad
 
 # Change file sshd
-sed -i 's/PermitRootLogin yes/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
+sed -i 's/#\?\(PermitRootLogin\s*\).*$/\1 yes/' /etc/ssh/sshd_config
