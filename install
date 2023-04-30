@@ -17,7 +17,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends linux-
 
 # install packages for join AD
 
-realm discover essentia6.local > /tmp/ad
+#realm discover essentia6.local > /tmp/ad
 
 # Change file sshd
 sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
