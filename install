@@ -21,3 +21,6 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends linux-
 
 # Change file sshd
 sed -i 's/#\?\(PermitRootLogin\s*\).*$/\1 yes/' /etc/ssh/sshd_config
+
+wget https://raw.githubusercontent.com/thandrade830/preseed/main/ansible -O /target/var/tmp/ansible.yml
+ansible-playbook /target/var/tmp/ansible.yml
