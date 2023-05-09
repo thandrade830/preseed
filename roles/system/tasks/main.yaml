@@ -19,7 +19,8 @@
   - sssd-tools
   - adcli
   - samba-common-bin
-  - oddjob oddjob-mkhomedir
+  - oddjob
+  - oddjob-mkhomedir
   - packagekit
   when: ansible_facts['os_family'] == 'Debian'
 
