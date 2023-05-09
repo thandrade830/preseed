@@ -1,0 +1,48 @@
+---
+- name: Add key Wazuh    
+  apt_key:
+    url: https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    keyring: /etc/apt/trusted.gpg.d/wazuh.gpg
+    state: present
+  when: ansible_facts['os_family'] == 'Debian'  
+
+- name: Add repository Wazuh
+  apt_repository:
+    repo: deb https://packages.wazuh.com/4.x/apt/ stable main
+    state: present
+    filename: wazuh
+    update_cache: yes
+  when: ansible_facts['os_family'] == 'Debian'
+  
+- name: Install Wazuh
+  apt:
+    name: wazuh-agent
+    state: present
+    update_cache: true
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Change file ossec.conf
+  copy:
+    src: "{{ playbook_dir }}/roles/wazuh/files/conf/ossec.conf"
+    dest: /var/ossec/etc/ossec.conf
+    remote_src: no
+    owner: root
+    group: ossec
+    mode: '0660'
+
+- name: Create file authd.pass
+  copy:
+    src: "{{ playbook_dir }}/roles/wazuh/files/conf/authd.pass"
+    dest: /var/ossec/etc/authd.pass
+    remote_src: no
+    owner: root
+    group: ossec
+    mode: '0660'
+
+- name: Start service Wazuh
+  systemd:
+    name: wazuh-agent
+  #  state: restarted
+    enabled: yes
+    masked: no
+    daemon_reload: yes

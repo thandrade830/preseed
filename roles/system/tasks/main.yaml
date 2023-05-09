@@ -1,0 +1,56 @@
+---
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+    install_recommends: false
+  loop:
+  - htop
+  - locales-all
+  - unzip
+  - apt-transport-https
+  - ca-certificates
+  - cloud-guest-utils
+  - realmd
+  - libnss-sss
+  - libpam-sss
+  - sssd
+  - sssd-tools
+  - adcli
+  - samba-common-bin
+  - oddjob oddjob-mkhomedir
+  - packagekit
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Replace file motd
+  copy:
+    src: "{{ playbook_dir }}/roles/system/files/conf/motd"
+    dest: /etc/motd
+    remote_src: no
+    owner: root
+    group: root
+    mode: '0644'
+
+
+# - name: Download codedeploy
+#   get_url:
+#     url: https://aws-codedeploy-sa-east-1.s3.amazonaws.com/releases/codedeploy-agent_1.3.2-1902_all.deb
+#     dest: /tmp/codedeploy-agent_1.3.2-1902_all.deb
+#     mode: '0770'
+
+# - name: Install codedeploy
+#   apt:
+#     deb: /tmp/codedeploy-agent_1.3.2-1902_all.deb
+
+# - name: Set timezone to America/Sao_Paulo
+#   timezone:
+#     name: America/Sao_Paulo
+
+# - name: Start service codedeploy
+#   systemd:
+#     name: codedeploy-agent
+#     state: restarted
+#     enabled: yes
+#     masked: no
+#     daemon_reload: yes

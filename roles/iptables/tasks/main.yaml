@@ -1,0 +1,35 @@
+---
+- name: Accept outgoing traffic
+  iptables:
+    chain: INPUT
+    in_interface: eth0
+    ctstate: ESTABLISHED,RELATED
+    source: 0.0.0.0/0
+    jump: ACCEPT
+
+- name: Accept connection SSH
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: "22"
+    ctstate: NEW,ESTABLISHED
+    source: "{{ IP_QLK }}"
+    jump: ACCEPT
+
+- name: Accept connection HTTP
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: "80"
+    ctstate: NEW,ESTABLISHED
+    source: 0.0.0.0/0
+    jump: ACCEPT
+
+- name: Accept connection HTTPS
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: "443"
+    ctstate: NEW,ESTABLISHED
+    source: 0.0.0.0/0
+    jump: ACCEPT
