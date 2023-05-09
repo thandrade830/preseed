@@ -1,8 +1,0 @@
-- name: "Install nginx"
-  hosts: localhost
-  connection: local 
-  tasks:
-    - name: Ansible apt install nginx
-      apt:
-        name: nginx
-        state: present
