@@ -4,7 +4,7 @@
     name: "{{ item }}"
     state: present
     update_cache: true
-    install_recommends: false
+    #install_recommends: false
   loop:
   - htop
   - locales-all
