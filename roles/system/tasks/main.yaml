@@ -1,15 +1,10 @@
 ---
-- name: Remove cdrom repository entry
-  apt_repository:
-    repo: "deb cdrom:[Debian GNU/Linux {{ ansible_distribution_release }} _{{ ansible_distribution_version }}_ - Official amd64 DVD Binary-1 20210814-10:04]/ {{ ansible_distribution_release | lower}} contrib main"
-    state: absent
-        
 - name: Install packages
   apt:
     name: "{{ item }}"
     state: present
     update_cache: true
-    #install_recommends: false
+    install_recommends: false
   loop:
   - htop
   - locales-all
