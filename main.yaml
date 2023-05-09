@@ -1,9 +1,8 @@
 ---
 - name: Configure Debian
-  hosts: all 
+  hosts: localhost 
   connection: local
   become: True
   become_user: root
   roles:
     - system
-    - wazuh
