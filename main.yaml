@@ -7,4 +7,3 @@
   roles:
     - system
     - wazuh
-    - iptables
