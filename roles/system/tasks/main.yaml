@@ -1,42 +1,42 @@
 ---
 - name: Remove cdrom repository entry
   apt_repository:
-    repo: "deb cdrom:[Debian GNU/Linux {{ ansible_distribution_release }} _{{ ansible_architecture }}_ {{ cdrom_release }}]/ {{ ansible_distribution_release }} main contrib non-free"
+    repo: "deb cdrom:[Debian GNU/Linux 11.7.0 _Bullseye_ - Official amd64 NETINST 20230429-11:49]/ bullseye main"
     state: absent
         
-# - name: Install packages
-#   apt:
-#     name: "{{ item }}"
-#     state: present
-#     update_cache: yes
-#     install_recommends: false
-#   loop:
-#   - htop
-#   - locales-all
-#   - unzip
-#   - apt-transport-https
-#   - ca-certificates
-#   - cloud-guest-utils
-#   - realmd
-#   - libnss-sss
-#   - libpam-sss
-#   - sssd
-#   - sssd-tools
-#   - adcli
-#   - samba-common-bin
-#   - oddjob
-#   - oddjob-mkhomedir
-#   - packagekit
-#   when: ansible_facts['os_family'] == 'Debian'
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    install_recommends: false
+  loop:
+  - htop
+  - locales-all
+  - unzip
+  - apt-transport-https
+  - ca-certificates
+  - cloud-guest-utils
+  - realmd
+  - libnss-sss
+  - libpam-sss
+  - sssd
+  - sssd-tools
+  - adcli
+  - samba-common-bin
+  - oddjob
+  - oddjob-mkhomedir
+  - packagekit
+  when: ansible_facts['os_family'] == 'Debian'
 
-# - name: Replace file motd
-#   copy:
-#     src: "{{ playbook_dir }}/roles/system/files/conf/motd"
-#     dest: /etc/motd
-#     remote_src: no
-#     owner: root
-#     group: root
-#     mode: '0644'
+- name: Replace file motd
+  copy:
+    src: "{{ playbook_dir }}/roles/system/files/conf/motd"
+    dest: /etc/motd
+    remote_src: no
+    owner: root
+    group: root
+    mode: '0644'
 
 
 # - name: Download codedeploy
