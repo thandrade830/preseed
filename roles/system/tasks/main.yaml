@@ -12,6 +12,7 @@
     install_recommends: false
   loop:
   - htop
+  - vim
   - locales-all
   - unzip
   - apt-transport-https
